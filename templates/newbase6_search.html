@@ -1,0 +1,50 @@
+{% extends "newbase6.html"%}
+{% block title %}Index Page{% endblock %}
+{% block content %}
+<input class = "hidden_com_id2" type="hidden" value="All"></input>
+<br>
+<div class="bg-light mr-md-3 pt-3 px-3 pt-md-5 px-md-5 text-center overflow-hidden" style="margin-left: 20px;">
+    {% for i in range(1,5)%}
+        {% if i == 4 %}
+            <a class="btn btn-outline-secondary qtbtn" href="#" value = {{i}} style="background-color : #6c757c; color :white">{{i}}분기</a>
+        {% else %}
+            <a class="btn btn-outline-secondary" href="#" value = {{i}}>{{i}}분기</a>
+        {% endif %}
+    {% endfor %}
+    <a class="btn btn-outline-secondary qtbtn" href="#" value = 5>전체</a>
+    <div class="my-3 p-3">
+        <h2 class="display-5">여러 기업의 정보를 알려드립니다.<br>분기를 선택하고 문장을 시작해주세요!</h2>
+        <div class="qt" style="display: none;">4</div>
+    </div>
+    <span style="color:gray;font-size: 15px;text-align: left;position: relative;right: 29.5%;bottom: 3px;">
+        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-info-circle" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+          <path fill-rule="evenodd" d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+          <path d="M8.93 6.588l-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588z"/>
+          <circle cx="8" cy="4.5" r="1"/>
+        </svg>
+        예시 : 삼성전자와 LG전자의 매출은
+      </span>
+    <div class="bg-white shadow-sm mx-auto" style="width: 75%; height: fit-content; border-radius: 21px 21px 21px 21px;text-align: left;padding:1%">
+    <input class="gensent" type="text" placeholder="생성할 문장을 시작해주세요" style="width : 85%">
+    <button class="generate" style="border-radius: 10px;outline:none;width: 100px;">Generate</button>
+    </div>
+    <br><br><br><br>
+    
+    <div class="bg-white shadow-sm mx-auto" style="width: 75%; height: 300px; border-radius: 21px 21px 21px 21px;text-align: left;padding:1%;margin-bottom: 100px;">
+        <div class="generated2">문장이 여기 생성됩니다.</div>
+        <div class="generated3"></div>
+        
+        <br><br><br>
+        <div class='loader'>
+            <div class='loader--dot'></div>
+            <div class='loader--dot'></div>
+            <div class='loader--dot'></div>
+            <div class='loader--dot'></div>
+            <div class='loader--dot'></div>
+            <div class='loader--dot'></div>
+            <div class='loader--text'></div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

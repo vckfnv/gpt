@@ -1,0 +1,21 @@
+{% extends "newbase6.html"%}
+{% block title %}Index Page{% endblock %}
+{% block content %}
+
+<br>
+<div class="bg-light mr-md-3 pt-3 px-3 pt-md-5 px-md-5 text-center overflow-hidden" style="margin-left: 20px;">
+    <div class="my-3 p-3">
+    <h2 class="display-5">FreshDay</h2>
+    </div>
+    <div class="bg-white shadow-sm mx-auto" style="width: 75%; height: fit-content; border-radius: 21px 21px 21px 21px;text-align: left;padding:1%">
+    안녕하세요, 저희는 KPC 인공지능 플랫폼 개발자 양성과정의 '와썹컴퍼니' 개발을 맡은 신선우, 이대희 라고 합니다.<br>
+    부족하지만 저희 웹 사이트를 이용해보시고 많은 피드백 주시면 감사하겠습니다.<br>
+    수업에서 배운 자연어 처리를 바탕으로 KoGPT2까지 다양한 경험을 할 수 있었습니다.<br>
+    </div>
+    
+    <br>
+
+    <img src= "{{url_for('static',filename= 'images/freshday.png')}}" style="width: 500px;">
+</div>
+
+{% endblock %}

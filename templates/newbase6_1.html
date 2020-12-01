@@ -1,0 +1,52 @@
+{% extends "newbase6.html"%}
+{% block title %}Index Page{% endblock %}
+{% block content %}
+<br>
+
+<div class="container">
+  <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-info-circle" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+    <path fill-rule="evenodd" d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+    <path d="M8.93 6.588l-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588z"/>
+    <circle cx="8" cy="4.5" r="1"/>
+  </svg><span style="font-size: 10px;"> 기업 선정 기준: 300대 기업 : <a href="#" style="color: black;">CEO스코어</a> / 30대 그룹: <a href="#" style="color: black;">기업진단포털</a></span>
+  <br><br>
+  <div class="card-deck">
+    <div class='row'>
+    {% for item in data2%}
+      {%if (item[0] =='002') or (item[0] =='003') or (item[0] =='004'): %}  
+      <a class="card" href='/com/{{item[0]}}/4' value = {{item[0]}}>
+        <img class="card-img-top" src="{{item[5]}}" alt="Card image cap">
+        <div class="card-body">
+          <h2 class="card-title">{{item[1]}}</h5>
+          <hr>
+          <p class="card-text" style = "font-size : 8px">업종 : {{item[3]}}<br>대표 : {{item[4]}}</p>
+          <p class="card-text"><small class="text-muted">3분기/ 4분기</small></p>
+        </div>
+      </a>
+      {%elif (item[0] =='001') %}
+      <a class="card" href='/com/{{item[0]}}/4' value = {{item[0]}}>
+        <img class="card-img-top" src="{{item[5]}}" alt="Card image cap">
+        <div class="card-body">
+          <h2 class="card-title">{{item[1]}}</h5>
+          <hr>
+          <p class="card-text" style = "font-size : 8px">업종 : {{item[3]}}<br>대표 : {{item[4]}}</p>
+          <p class="card-text"><small class="text-muted">1분기/ 2분기/ 3분기/ 4분기</small></p>
+        </div>
+      </a>
+      {%else%}
+      <a class="card dark" href='javascript:void(0);' value = {{item[0]}} onclick="alert('해당 기업의 자료는 추후 추가하겠습니다. 감사합니다.')">
+        <img class="card-img-top" src="{{item[5]}}" alt="Card image cap">
+        <div class="card-body">
+          <h2 class="card-title">{{item[1]}}</h5>
+          <hr>
+          <p class="card-text" style = "font-size : 8px">업종 : {{item[3]}}<br>대표 : {{item[4]}}</p>
+          <p class="card-text"><small class="text-muted">3분기/ 4분기</small></p>
+        </div>
+      </a>
+      {%endif%}
+    {% endfor %}
+    </div>
+  </div>
+</div>
+
+{% endblock %}

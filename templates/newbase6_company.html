@@ -1,0 +1,240 @@
+{% extends "newbase6.html"%}
+{% block title %}Index Page{% endblock %}
+{% block content %}
+<input class = "hidden_com_id" type="hidden" value={{thiscom[2]}}></input>
+<input class = "hidden_com_id2" type="hidden" value={{thiscom[0]}}></input>
+<div class = "qt" style="display: none;">{{quarter}}</div>
+
+
+<div class="position-relative overflow-hidden p-3 p-md-5 m-md-3 text-center bg-light" style = "background-image: url({{url_for('static', filename = 'images/buildings2.jpg')}}); background-size: cover;background-repeat: no-repeat; background-position: center">
+  <div class="col-md-5 p-lg-5 mx-auto my-5" style = 'text-shadow: 0 0 5px black; color: white'>
+    <h1 class="display-4 font-weight-normal">{{thiscom[1]}}</h1>
+    {% if quarter|int == 1%}
+      <p class="lead font-weight-normal">본 기업 분석 리포트는 2020년 01월 01일~ 2020년 03월 31일 <br>까지의 자료를 바탕으로 작성되었습니다.</p>
+      {% elif quarter|int == 2%}
+      <p class="lead font-weight-normal">본 기업 분석 리포트는 2020년 04월 01일~ 2020년 06월 30일 <br>까지의 자료를 바탕으로 작성되었습니다.</p>
+      {% elif quarter|int == 3%}
+      <p class="lead font-weight-normal">본 기업 분석 리포트는 2020년 07월 01일~ 2020년 09월 30일 <br>까지의 자료를 바탕으로 작성되었습니다.</p>
+      {% else %}
+      <p class="lead font-weight-normal">본 기업 분석 리포트는 2020년 10월 01일~ 현재 <br>까지의 자료를 바탕으로 작성되었습니다.</p>
+    {% endif%}
+    <br>
+    <p class="lead font-weight-normal">해당 기업 총 뉴스 기사 수: {{num_article}} 개</p>
+  </div>
+</div>
+
+<div class="position-relative overflow-hidden p-3 p-md-5 m-md-3 text-center bg-light">
+  {% for i in range(1,5)%}
+    {% if i == quarter|int %}
+        <a class="btn btn-outline-secondary qtbtn" href="/com/{{thiscom[0]}}/{{i}}" value = {{i}} style="background-color : #6c757c; color :white">{{i}}분기</a>
+    {% else %}
+        <a class="btn btn-outline-secondary qtbtn" href="/com/{{thiscom[0]}}/{{i}}" value = {{i}}>{{i}}분기</a>
+    {% endif %}
+  {% endfor %}
+  <br><br><p>{{quarter}} 분기 뉴스 기사 수: {{wordcloud[5]}} 개</p>
+</div>
+
+<div class="wrapper">
+  <div class="bg-light mr-md-3 pt-3 px-3 pt-md-5 px-md-5 text-center overflow-hidden">
+    <div class="my-3 py-3">
+      <h2 class="display-5">{{thiscom[1]}} 기업 정보</h2>
+    </div>
+    <div class="bg-white shadow-sm mx-auto" style="text-align: center;padding-top:5%;width: 90%; height: 400px; border-radius: 21px 21px 21px 21px;overflow: auto;overflow-x: hidden;">
+      <div class="infos" style="display: grid;grid-template-columns: repeat(2,1fr);">
+        <div class="infos2">
+          <svg width="2em" height="2em" viewBox="0 0 16 16" class="bi bi-tools" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+            <path fill-rule="evenodd" d="M0 1l1-1 3.081 2.2a1 1 0 0 1 .419.815v.07a1 1 0 0 0 .293.708L10.5 9.5l.914-.305a1 1 0 0 1 1.023.242l3.356 3.356a1 1 0 0 1 0 1.414l-1.586 1.586a1 1 0 0 1-1.414 0l-3.356-3.356a1 1 0 0 1-.242-1.023L9.5 10.5 3.793 4.793a1 1 0 0 0-.707-.293h-.071a1 1 0 0 1-.814-.419L0 1zm11.354 9.646a.5.5 0 0 0-.708.708l3 3a.5.5 0 0 0 .708-.708l-3-3z"/>
+            <path fill-rule="evenodd" d="M15.898 2.223a3.003 3.003 0 0 1-3.679 3.674L5.878 12.15a3 3 0 1 1-2.027-2.027l6.252-6.341A3 3 0 0 1 13.778.1l-2.142 2.142L12 4l1.757.364 2.141-2.141zm-13.37 9.019L3.001 11l.471.242.529.026.287.445.445.287.026.529L5 13l-.242.471-.026.529-.445.287-.287.445-.529.026L3 15l-.471-.242L2 14.732l-.287-.445L1.268 14l-.026-.529L1 13l.242-.471.026-.529.445-.287.287-.445.529-.026z"/>
+          </svg>
+          <span style="position: relative;bottom: 10px;left:5px;color:gray;font-size: 13px;">산업</span><br>
+          <span style="position: relative;bottom: 20px;left:30px">&nbsp; {{thiscom[7]}}<br></span>
+        </div>
+
+        <div class="infos2">
+          <svg width="2em" height="2em" viewBox="0 0 16 16" class="bi bi-people" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+            <path fill-rule="evenodd" d="M15 14s1 0 1-1-1-4-5-4-5 3-5 4 1 1 1 1h8zm-7.978-1h7.956a.274.274 0 0 0 .014-.002l.008-.002c-.002-.264-.167-1.03-.76-1.72C13.688 10.629 12.718 10 11 10c-1.717 0-2.687.63-3.24 1.276-.593.69-.759 1.457-.76 1.72a1.05 1.05 0 0 0 .022.004zM11 7a2 2 0 1 0 0-4 2 2 0 0 0 0 4zm3-2a3 3 0 1 1-6 0 3 3 0 0 1 6 0zM6.936 9.28a5.88 5.88 0 0 0-1.23-.247A7.35 7.35 0 0 0 5 9c-4 0-5 3-5 4 0 .667.333 1 1 1h4.216A2.238 2.238 0 0 1 5 13c0-1.01.377-2.042 1.09-2.904.243-.294.526-.569.846-.816zM4.92 10c-1.668.02-2.615.64-3.16 1.276C1.163 11.97 1 12.739 1 13h3c0-1.045.323-2.086.92-3zM1.5 5.5a3 3 0 1 1 6 0 3 3 0 0 1-6 0zm3-2a2 2 0 1 0 0 4 2 2 0 0 0 0-4z"/>
+          </svg>
+          <span style="position: relative;bottom: 10px;left:5px;color:gray;font-size: 13px;">사원수</span><br>
+          <span style="position: relative;bottom: 20px;left:30px">&nbsp; {{thiscom[8]}}<br></span>
+        </div>
+
+        <div class="infos2">
+          <svg width="2em" height="2em" viewBox="0 0 16 16" class="bi bi-calendar-range" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+            <path fill-rule="evenodd" d="M3.5 0a.5.5 0 0 1 .5.5V1h8V.5a.5.5 0 0 1 1 0V1h1a2 2 0 0 1 2 2v11a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2V3a2 2 0 0 1 2-2h1V.5a.5.5 0 0 1 .5-.5zM1 4v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V4H1z"/>
+            <path d="M9 7a1 1 0 0 1 1-1h5v2h-5a1 1 0 0 1-1-1zM1 9h4a1 1 0 0 1 0 2H1V9z"/>
+          </svg>
+          <span style="position: relative;bottom: 10px;left:5px;color:gray;font-size: 13px;">설립일</span><br>
+          <span style="position: relative;bottom: 20px;left:30px">&nbsp; {{thiscom[9]}}<br></span>
+        </div>
+
+        <div class="infos2">
+          <svg width="2em" height="2em" viewBox="0 0 16 16" class="bi bi-geo-alt" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+            <path fill-rule="evenodd" d="M12.166 8.94C12.696 7.867 13 6.862 13 6A5 5 0 0 0 3 6c0 .862.305 1.867.834 2.94.524 1.062 1.234 2.12 1.96 3.07A31.481 31.481 0 0 0 8 14.58l.208-.22a31.493 31.493 0 0 0 1.998-2.35c.726-.95 1.436-2.008 1.96-3.07zM8 16s6-5.686 6-10A6 6 0 0 0 2 6c0 4.314 6 10 6 10z"/>
+            <path fill-rule="evenodd" d="M8 8a2 2 0 1 0 0-4 2 2 0 0 0 0 4zm0 1a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
+          </svg>
+          <span style="position: relative;bottom: 10px;left:5px;color:gray;font-size: 13px;">주소</span>
+          <div style="position: relative;bottom: 20px;left:30px;width: 220px;word-wrap: break-word;">&nbsp; {{thiscom[10]}}</div>
+        </div>
+        
+        <div class="infos2" style="bottom: 30px;">
+          <svg width="2em" height="2em" viewBox="0 0 16 16" class="bi bi-cash-stack" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+            <path d="M14 3H1a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1h-1z"/>
+            <path fill-rule="evenodd" d="M15 5H1v8h14V5zM1 4a1 1 0 0 0-1 1v8a1 1 0 0 0 1 1h14a1 1 0 0 0 1-1V5a1 1 0 0 0-1-1H1z"/>
+            <path d="M13 5a2 2 0 0 0 2 2V5h-2zM3 5a2 2 0 0 1-2 2V5h2zm10 8a2 2 0 0 1 2-2v2h-2zM3 13a2 2 0 0 0-2-2v2h2zm7-4a2 2 0 1 1-4 0 2 2 0 0 1 4 0z"/>
+          </svg>
+          <span style="position: relative;bottom: 10px;left:5px;color:gray;font-size: 13px;">매출액</span><br>
+          <span class="address" style="position: relative;bottom: 20px;left:30px">&nbsp; {{thiscom[11]}}<br></span>
+        </div>
+
+        <div class="infos2" style="bottom: 30px;">
+          <svg width="2em" height="2em" viewBox="0 0 16 16" class="bi bi-house-door" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+          <path fill-rule="evenodd" d="M7.646 1.146a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 .146.354v7a.5.5 0 0 1-.5.5H9.5a.5.5 0 0 1-.5-.5v-4H7v4a.5.5 0 0 1-.5.5H2a.5.5 0 0 1-.5-.5v-7a.5.5 0 0 1 .146-.354l6-6zM2.5 7.707V14H6v-4a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1 .5.5v4h3.5V7.707L8 2.207l-5.5 5.5z"/>
+          <path fill-rule="evenodd" d="M13 2.5V6l-2-2V2.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5z"/>
+          </svg>
+          <span style="position: relative;bottom: 10px;left:5px;color:gray;font-size: 13px;">웹사이트</span><br>
+          <span style="position: relative;bottom: 20px;left:30px">&nbsp; <a href = "{{thiscom[12]}}" style="color: black;" target="_blank">{{thiscom[1]}}</a></span><br>
+        </div>
+      </div>
+      <hr>
+      <div class="my-3 p-3">
+        <h2 class="display-5">기업뉴스 요약</h2>
+      </div>
+      <div class="my-3 p-3" style="text-align: center;width: 90%;word-wrap: break-word;margin: 10px;position: relative;bottom: 30px;font-weight: lighter;font-size: smaller;">
+        <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-info-circle" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+          <path fill-rule="evenodd" d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+          <path d="M8.93 6.588l-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588z"/>
+          <circle cx="8" cy="4.5" r="1"/>
+        </svg><span style="color: gray;font-size: 13px;text-align: left;">TextRank를 이용하여 {{wordcloud[5]}}개의 기사를 요약한 결과입니다.</span><br><br>
+        {{wordcloud[3]}}
+      </div>
+    </div>
+  </div>
+  <div class="bg-light mr-md-3 pt-3 px-3 pt-md-5 px-md-5 text-center overflow-hidden">
+    <div class="my-3 p-3">
+      <h2 class="display-5">Wordcloud</h2>
+    </div>
+    <div class="bg-white shadow-sm mx-auto" style="width: 90%; height: 400px; border-radius: 21px 21px 21px 21px;">
+      <div><img src = "{{url_for('static',filename = 'images/graph/'+wordcloud[2])}}" style = "width: 90%;height:400px;object-fit: contain;"></div>
+    </div>
+        
+  </div>
+</div>
+
+<div class="wrapper">
+  <div class="bg-light mr-md-3 pt-3 px-3 pt-md-5 px-md-5 text-center overflow-hidden">
+    <h2 class="display-5">핵심 이슈</h2>
+    <br>
+    <a class="btn btn-outline-secondary catebtn" href="javascript:void(0);" value = "1" style="background-color: #6c757c;color: white;">신제품</a>
+    <a class="btn btn-outline-secondary catebtn" href="javascript:void(0);" value = "2">주가</a>
+    <a class="btn btn-outline-secondary catebtn" href="javascript:void(0);" value = "3">투자</a>
+    <a class="btn btn-outline-secondary catebtn" href="javascript:void(0);" value = "4">매출</a>
+    <a class="btn btn-outline-secondary catebtn" href="javascript:void(0);" value = "5">채용</a>
+    <a class="btn btn-outline-secondary catebtn" href="javascript:void(0);" value = "6">육성</a>
+    <a class="btn btn-outline-secondary catebtn" href="javascript:void(0);" value = "7">조직문화</a>
+    <a class="btn btn-outline-secondary catebtn" href="javascript:void(0);" value = "8">연봉</a>
+    <div class = "category" style="display: none;">1</div>
+    <div class="my-3 p-3">
+      
+      <div style="position: relative;left: 18%;top:10px">
+        <button class="infobtn">
+          <svg width="1.2em" height="1.2em" viewBox="0 0 16 16" class="bi bi-info-circle" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+            <path fill-rule="evenodd" d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+            <path d="M8.93 6.588l-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588z"/>
+            <circle cx="8" cy="4.5" r="1"/>
+          </svg>
+          <span class="plotspan">차원축소 후 클러스터링 시각화</span>
+        </button>&nbsp;&nbsp;&nbsp;&nbsp;
+        <button class="infobtn2">
+          <svg width="1.2em" height="1.2em" viewBox="0 0 16 16" class="bi bi-info-circle" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+            <path fill-rule="evenodd" d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+            <path d="M8.93 6.588l-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588z"/>
+            <circle cx="8" cy="4.5" r="1"/>
+          </svg>
+          <span class="plotspan">차원축소 후 클러스터링 시각화 전체 분기</span>
+        </button>
+      </div>
+    </div>
+    <div class="bg-white shadow-sm mx-auto" style="position: relative; bottom:35px;width: 90%; height:300px;border-radius: 21px 21px 21px 21px;text-align: center;padding:1%;overflow: auto;">
+      <img class = "test" src="{{url_for('static', filename='images/graph/'+issues[0][9])}}">
+      <img class = "test2" src="{{url_for('static', filename='images/graph/'+issues[0][10])}}">
+      <ul id="issueul">
+        {% for item in issues%}
+        <li class = "alignmiddle" style="margin:5px">
+          <a class = "issue" href = "javascript:void(0);" value ={{item[8]}} style="color: rgb(80, 79, 79);"><span style="font-size:small;font-weight: lighter;color: rgb(184, 182, 182);">ISSUE {{item[7]|int+1}}</span><br>{{item[0]}}</a><br>
+        </li><hr>
+        {% endfor %}
+      </ul>
+    </div>
+    
+  </div>
+  
+  <div class="bg-light mr-md-3 pt-3 px-3 pt-md-5 px-md-5 text-center overflow-hidden">
+    <div class="my-3 p-3">
+      <h2 class="display-5">관련 기사</h2>
+    </div>
+    <span style="color:gray;font-size: 13px;text-align: left;position: relative;right: 20%;">
+      <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-info-circle" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+        <path fill-rule="evenodd" d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+        <path d="M8.93 6.588l-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588z"/>
+        <circle cx="8" cy="4.5" r="1"/>
+      </svg>
+      핵심 이슈에서 ISSUE 번호를 클릭하면 해당 기사가 노출됩니다.
+    </span><br>
+    <div class="bg-white shadow-sm mx-auto" style="width: 90%; height: 400px; border-radius: 21px 21px 21px 21px;text-align: left;padding:1%;overflow: auto;">
+      <ul id="articleul" style="width: 100%;">
+        {% for i in range(8)%}
+        <li class = "alignmiddle" style="margin:5px;display:block">
+            <a class = "article" href = "#" style="display:block;width: 100%;margin-right: 10px;">
+            </a><br><span class = "article2" style = "font-size:10px"></span>
+          </li><br><hr>
+        {% endfor %}
+      </ul>
+    </div>
+  </div>
+</div>
+
+<div class="wrapper">
+  <div class="bg-light mr-md-3 pt-3 px-3 pt-md-5 px-md-5 text-center overflow-hidden">
+    <div class="my-3 p-3">
+      <h2 class="display-5">AI봇 지니</h2>
+      
+    </div>
+    <span style="font-size: 13px;text-align: left;position: relative;right: 11%;">{{thiscom[1]}} {{quarter}}분기에 대해 궁금한 것을 시작 단어로 입력하고, generate 버튼을 눌러주세요!</span><br>
+    <span style="color:gray;font-size: 13px;text-align: left;position: relative;right: 34%;">
+      <svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-info-circle" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+        <path fill-rule="evenodd" d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+        <path d="M8.93 6.588l-2.29.287-.082.38.45.083c.294.07.352.176.288.469l-.738 3.468c-.194.897.105 1.319.808 1.319.545 0 1.178-.252 1.465-.598l.088-.416c-.2.176-.492.246-.686.246-.275 0-.375-.193-.304-.533L8.93 6.588z"/>
+        <circle cx="8" cy="4.5" r="1"/>
+      </svg>
+      예시 : {{thiscom[1]}} 매출은
+    </span><br>
+    <div class="bg-white shadow-sm mx-auto" style="width: 90%; height: fit-content; border-radius: 21px 21px 21px 21px;text-align: left;padding:1%;margin-top: 10px;">
+      <input class="gensent" type="text" placeholder="생성할 문장을 시작해주세요" style="width : 82%">
+      <button class="generate" style="border-radius: 10px;outline:none;">Generate</button>
+    </div>
+    
+  </div> 
+
+  <div class="bg-light mr-md-3 pt-3 px-3 pt-md-5 px-md-5 text-center overflow-hidden">
+    <div class="my-3 p-3">
+      <h2 class="display-5">지니가 생성한 문장</h2>
+    </div>
+    <div class="bg-white shadow-sm mx-auto sent" style="width: 90%; height: fit-content; border-radius: 21px 21px 21px 21px;text-align: left;padding:1%">
+      <div class="generated">
+        <div class="generated2">문장이 여기 생성됩니다.</div>
+        <div class="generated3"></div>
+        <div class='loader'>
+          <div class='loader--dot'></div>
+          <div class='loader--dot'></div>
+          <div class='loader--dot'></div>
+          <div class='loader--dot'></div>
+          <div class='loader--dot'></div>
+          <div class='loader--dot'></div>
+          <div class='loader--text'></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}
